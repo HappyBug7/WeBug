@@ -1,0 +1,32 @@
+{
+  "name": "front_end",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build"
+  },
+  "dependencies": {
+    "axios": "^1.6.7",
+    "boxicons": "^2.1.4",
+    "core-js": "^3.8.3",
+    "element-plus": "^2.5.5",
+    "less": "^4.2.0",
+    "less-loader": "^12.2.0",
+    "vue": "^3.2.13",
+    "vue-draggable-resizable": "^3.0.0",
+    "vue-router": "^4.0.3",
+    "vuedraggable": "^2.24.3"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~5.0.0",
+    "@vue/cli-plugin-router": "~5.0.0",
+    "@vue/cli-service": "~5.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ]
+}
