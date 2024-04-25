@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import Setting from '@/components/Setting.vue'
+import Setting from '@/components/tools/Setting.vue'
 import Time from '@/components/Time.vue';
 import WebShortCut from '@/components/WebShortCut.vue';
 import Search from '@/components/Search.vue';
@@ -33,7 +33,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
   #time{
     margin-top: 100px;
   }

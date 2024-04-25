@@ -7,11 +7,17 @@
 </template>
 
 <style>
+@font-face {
+  font-family: 'comic sans ms';
+  src: url('~@/assets/COMIC.TTF')format('truetype');
+}
 body{
   overflow: hidden;
+  font-family: 'comic sans ms';
 }
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  /* font-family: Avenir, Helvetica, Arial, sans-serif; */
+  font-family: 'comic sans ms';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

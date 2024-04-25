@@ -24,7 +24,7 @@
 
 <script>
 import axios from 'axios';
-import "../assets/style.css";
+import "../../assets/style.css";
 import VueDraggableResizable from 'vue-draggable-resizable';
 export default {
   data(){
@@ -34,6 +34,14 @@ export default {
       switch_ : 1,
       url: '',
       name: '',
+    }
+  },
+  props:{
+    position:{
+      type: Array,
+      default: function () {
+        return []
+      }
     }
   },
   components: {
@@ -75,6 +83,9 @@ export default {
 </script>
 
 <style scoped>
+  *{
+    font-family: 'comic sans ms';
+  }
   .container{
     position: relative;
   }
@@ -86,8 +97,8 @@ export default {
     background-color: #fff5f39d;
     border-radius: 50%;
     position: fixed;
-    top: 0px;
-    left: 0;
+    top: v-bind(position[0]);
+    left: v-bind(position[1]);
     box-shadow: 2px 2px 14px 1px rgba(00,00,00,0.2);
     transition: all 0.3s;
     display: flex;
