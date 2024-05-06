@@ -6,7 +6,7 @@
         <button class="searchButton" @click="searchFnuction">
           <i class='bx bx-search' id="searchIcon"></i>
         </button>
-        <input type="text" id="mainSearch" @focus="focusFunction" v-model="q" :style="{zIndex:index}" @keyup.enter="searchFnuction" @input="autoCompelete">
+        <input type="text" id="mainSearch" @focus="focusFunction" v-model="q" :style="{zIndex:index}" @keyup.enter="searchFnuction" @input="autoCompelete" ref="SearchInput">
       </div>
     </div>
     <div class="suggestion" :style="{display:isOpen? 'block':'none'}">
@@ -72,6 +72,11 @@ export default {
         this.last = this.q
       }
     },
+    ready2search(event){
+      if(event.key = "Control"){
+        this.searchFnuction()
+      }
+    },
     getStyle(index){
       // if(index == 0){
       //   return{
@@ -89,8 +94,21 @@ export default {
     },
     suggestFunc(quest){
       window.location.href="https://cn.bing.com/search?q="+quest
+    },
+    handleKeyDown(event){
+      if (event.ctrlKey && event.key === 'a') {
+        this.$refs.SearchInput.focus();
+      }
     }
-  }
+  },
+  mounted() {
+    // 添加键盘事件监听器
+    window.addEventListener('keydown', this.handleKeyDown);
+  },
+  destroyed() {
+    // 移除键盘事件监听器，避免内存泄漏
+    window.removeEventListener('keydown', this.handleKeyDown);
+  },
 }
 </script>
 

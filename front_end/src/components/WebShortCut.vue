@@ -1,7 +1,10 @@
 <template>
   <div class="web">
     <div id="shortcuts">
-      <a v-for="shortcut in this.s_data" :href="shortcut.LinkOri" :title="shortcut.LinkTitle" class="shortcut" target="_blank">
+      <a v-for="(shortcut,index) in s_data" :href="shortcut.LinkOri" :title="shortcut.LinkTitle" class="shortcut" target="_blank" :id="index">
+        <div :style="{ display: showNum ? 'block' : 'none', color: '#75c9fe'}">
+          {{ index + 1 }}
+        </div>
         <div class="container">
           <img :src="shortcut.LinkIcon" class="imgs"/>
         </div>
@@ -26,7 +29,8 @@ export default {
       link : [],
       tit : [],
       s_data : [],
-      maxlen : 9
+      maxlen : 9,
+      showNum : false,
     };
   },
   methods: {
@@ -44,7 +48,29 @@ export default {
         }
       }
       return str.length
-    }
+    },
+    handleKeyDown(event) {
+      if (event.altKey) {
+        event.preventDefault();
+        this.showNum = true;
+        const numberKey = parseInt(event.key);
+        if (!isNaN(numberKey) && numberKey >= 1 && numberKey <= 9) {
+          this.handleAltNumberPress(numberKey);
+        }
+      }
+    },
+    handleKeyUp(event) {
+      this.showNum = false;
+    },
+    handleAltNumberPress(number) {
+      if(number <= this.s_data.length){
+        var curr_shortcut = document.getElementById(number);
+        curr_shortcut.click();
+      }
+    },
+    handleFocus() {
+      this.showNum = false;
+    },
   },
   mounted() {
     axios.get('/api/shortcuts')
@@ -53,7 +79,16 @@ export default {
       // console.log(this.s_data)
     })
     .catch(err => console.log(err))
-  }
+    window.addEventListener('keydown', this.handleKeyDown);
+    window.addEventListener('keyup', this.handleKeyUp);
+    window.addEventListener('focus', this.handleFocus);
+  },
+  destroyed() {
+    // 移除键盘事件监听器，避免内存泄漏
+    window.removeEventListener('keydown', this.handleKeyDown);
+    window.removeEventListener('keyup', this.handleKeyUp);
+    window.removeEventListener('focus', this.handleFocus);
+  },
 }
 </script>
 

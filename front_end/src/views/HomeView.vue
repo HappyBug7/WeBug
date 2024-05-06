@@ -39,6 +39,7 @@ export default {
   }
   .home{
     height: 100vh;
+    /* background-color: #75c9fe; */
     background-color: #0F612F;
     background-image: url(../assets/bg_bench.jpg);
     background-size: 100vw 100vh;
